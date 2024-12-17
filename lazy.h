@@ -75,74 +75,59 @@ typedef struct {
     void (*strupp)(char* string);
 } __str__;
 
-int strlen(char* string)
-{
-  int length = 0;
-  while (*string != 0)
-  {
-    ++length;
-    ++string;
-  }
-  return length;
+int strlen(char* string) {
+    int length = 0;
+    while (*string != 0) {
+        ++length;
+        ++string;
+    }
+    return length;
 }
 
-void strcpy(char* dest, char* src)
-{
-  int size = strlen(src) + 1;
-  for (int i = 0; i < size; ++i)
-  {
-    dest[i] = src[i];
-  }
+void strcpy(char* dest, char* src) {
+    int size = strlen(src) + 1;
+    for (int i = 0; i < size; ++i) {
+        dest[i] = src[i];
+    }
 }
 
-bool strcmp(char* a, char* b)
-{
-  int i = 0;
-  while (1)
-  {
-    if (a[i] != b[i])
-    {
-      return false;
-    }
-    else if (a[i] == 0 && b[i] == 0)
-    {
-      return true;
-    }
+bool strcmp(char* a, char* b) {
+    int i = 0;
+    while (1) {
+        if (a[i] != b[i]) {
+            return false;
+        }
+        else if (a[i] == 0 && b[i] == 0) {
+            return true;
+        }
     ++i;
-  }
+    }
 }
 
-void stradd(char* base, char* extension)
-{
-  strcpy(base + strlen(base), extension);
+void stradd(char* base, char* extension) {
+    strcpy(base + strlen(base), extension);
 }
 
-void strcls(char* string)
-{
-  while (*string != 0)
-  {
-    *string = 0;
-    ++string;
-  }
+void strcls(char* string) {
+    while (*string != 0) {
+        *string = 0;
+        ++string;
+    }
 }
 
-char char_to_upper(char character)
-{
-  char offset = 'A' - 'a';
-  if (character >= 'a' && character <= 'z')
-  {
-    return character + offset;
-  }
-  return character;
+char char_to_upper(char character) {
+    char offset = 'A' - 'a';
+    if (character >= 'a' && character <= 'z') {
+        return character + offset;
+    }
+    return character;
 }
 
-void strupp(char* string)
-{
-  while (*string != 0)
-  {
-    *string = char_to_upper(*string);
-    ++string;
-  }
+void strupp(char* string) {
+    while (*string != 0) {
+        *string = char_to_upper(*string);
+        ++string;
+    }
 }
 
 __str__ str() {
