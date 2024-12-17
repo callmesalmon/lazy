@@ -49,6 +49,6 @@ And thus, `lazy(.h)` was born!
 ```sh
 git clone https://github.com/ElisStaaf/lazy
 cd lazy
-./install.sh
+sudo ./install.sh
 echo "Enjoy!"
 ```
