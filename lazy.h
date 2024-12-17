@@ -1,6 +1,10 @@
 #ifndef __LAZY__
 #define __LAZY__
 
+#if !defined(__STDC__) || __STDC_VERSION__ < 199901L
+#error "Lazy only works on C99+. Switch to it if you haven't yet."
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 
