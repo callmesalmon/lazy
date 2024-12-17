@@ -217,7 +217,7 @@ static int pretty_err_part_of(int err, size_t length, int *errs) {
 
 #define print(...)                                                      \
         _Generic((__VA_ARGS__),                                         \
-                 _Bool: fputs((_Bool)(__VA_ARGS__) ? "true" : "false", stdout), \
+                 bool: fputs((bool)(__VA_ARGS__) ? "true" : "false", stdout), \
                  default: printf(                                       \
                          _Generic((__VA_ARGS__),                        \
                                   char*:              "%s",		\
@@ -254,8 +254,7 @@ typedef unsigned long  ulong;
 
 /* Boolean <...> <impl> <pretty> */
 
-typedef unsigned int _Bool;
-#define bool _Bool
+typedef unsigned int bool;
 
 #define true  (bool)1
 #define false (bool)0
@@ -315,7 +314,7 @@ int fact(int n) {
     return n * fact(n - 1);
 }
 
-int pow(int n, int k) {
+int lpow(int n, int k) {
   int res = 1;
   while (k > 0)
   {
@@ -332,7 +331,7 @@ int inf() {
 __math__ math() {
     __math__ obj = {
         .fact = &fact,
-        .pow  = &pow,
+        .pow  = &lpow,
         .inf  = &inf
     };
     return obj;
@@ -350,7 +349,7 @@ typedef struct {
     void (*strupp)(char* str);
 } __str__;
 
-int strlen(char* str) {
+int lstrlen(char* str) {
     int length = 0;
     while (*str != 0) {
         ++length;
@@ -359,14 +358,14 @@ int strlen(char* str) {
     return length;
 }
 
-void strcpy(char* dest, char* src) {
+void lstrcpy(char* dest, char* src) {
     int size = strlen(src) + 1;
     for (int i = 0; i < size; ++i) {
         dest[i] = src[i];
     }
 }
 
-bool strcmp(char* a, char* b) {
+bool lstrcmp(char* a, char* b) {
     int i = 0;
     while (1) {
         if (a[i] != b[i]) {
@@ -379,18 +378,18 @@ bool strcmp(char* a, char* b) {
     }
 }
 
-void stradd(char* base, char* extension) {
+void lstradd(char* base, char* extension) {
     strcpy(base + strlen(base), extension);
 }
 
-void strcls(char* str) {
+void lstrcls(char* str) {
     while (*str != 0) {
         *str = 0;
         ++str;
     }
 }
 
-char char_to_upper(char character) {
+char lchar_to_upper(char character) {
     char offset = 'A' - 'a';
     if (character >= 'a' && character <= 'z') {
         return character + offset;
@@ -398,22 +397,22 @@ char char_to_upper(char character) {
     return character;
 }
 
-void strupp(char* str) {
+void lstrupp(char* str) {
     while (*str != 0) {
-        *str = char_to_upper(*str);
+        *str = lchar_to_upper(*str);
         ++str;
     }
 }
 
 __str__ str() {
     __str__ obj = {
-        .strlen        = &strlen,
-        .strcpy        = &strcpy,
-        .strcmp        = &strcmp,
-        .stradd        = &stradd,
-        .strcls        = &strcls,
-        .char_to_upper = &char_to_upper,
-        .strupp        = &strupp
+        .strlen        = &lstrlen,
+        .strcpy        = &lstrcpy,
+        .strcmp        = &lstrcmp,
+        .stradd        = &lstradd,
+        .strcls        = &lstrcls,
+        .char_to_upper = &lchar_to_upper,
+        .strupp        = &lstrupp
     };
     return obj;
 }
