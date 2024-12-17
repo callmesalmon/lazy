@@ -1,4 +1,8 @@
+#ifndef __LAZY__
+#define __LAZY__
+
 #include <stdio.h>
+#include <stdlib.h>
 
 /* IO-Class <stdio.h> <wrapper> */
 
@@ -142,3 +146,23 @@ __str__ str() {
     };
     return obj;
 }
+
+/* System-Class <stdlib.h?...> <wrapper> */
+
+typedef struct {
+    int   (*cmd)(char *self);
+} __sys__;
+
+int cmd(char *self) {
+    system(self);
+    return 0;
+}
+
+__sys__ sys() {
+    __sys__ obj = {
+        .cmd  = &cmd,
+    };
+    return obj;
+}
+
+#endif
