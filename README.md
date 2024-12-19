@@ -50,6 +50,23 @@ Becomes *this*:
 ```
 And thus, `lazy(.h)` was born!
 
+## Example
+```c
+#include <lazy.h>
+#include <errno.h>
+#include <assert.h>
+
+int main(int argc, char **argv) {
+    errno = 0;
+    try {
+        print("Hello World!");
+    } catch(EDOM) {
+        assert(errno = EDOM);
+    }
+    return 0;
+}
+```
+
 ## Install
 ```sh
 git clone https://github.com/ElisStaaf/lazy
