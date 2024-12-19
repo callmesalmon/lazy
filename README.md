@@ -27,7 +27,12 @@ that you could just *use*, like this:
 #include <magical-library-with-solutions-to-everything.h>
 
 int main() {
-    io().print("Best library ever, am I right?").newline()
+    try()
+        println("Hello World!");
+    catch()
+        println("NO YOU STUPID IDIOT");
+        return 1;
+    return 0;
 }
 ```
 Basically, a heaven where everything becomes easier, a world were *this*:
