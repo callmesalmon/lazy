@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include <iso646.h>
 
 /* DISCLAIMER: Some of these are shamelessly stolen from "Pretty C", which
@@ -21,7 +22,7 @@
 #define odd      1 == 1 &
 #define positive 0 <
 #define negative 0 >
-#define zero     0 ==
+#define neutral  0 ==
 #define empty    NULL ==
 #define null     NULL ==
 
@@ -231,7 +232,7 @@ static int pretty_err_part_of(int err, size_t length, int *errs) {
                                   unsigned short:     "%hi",		\
                                   unsigned int:       "%u",		\
                                   unsigned long:      "%lu",		\
-                                  unsigned long long: "%llu",		\
+                                  unsigned int: "%llu",		\
                                   float:              "%g",		\
                                   double:             "%g",		\
                                   long double:        "%Lg",		\
@@ -273,166 +274,168 @@ typedef unsigned int bool;
         : (sizeof(__VA_ARGS__) / sizeof(__VA_ARGS__[0]))
 #endif
 
+/* Miscellanous math <math.h,...> <impl> */
 
-/* IO-Class <stdio.h> <wrapper> */
+#define min(a, b) ((a) > (b) ? (b) : (a))
+#define max(a, b) ((a) < (b) ? (b) : (a))
 
-typedef struct {
-    int (*puts)(char *str);
-    int (*read)(char *str);
-} __io__;
-
-int put(char *str) {
-    printf("%s\n", str);
-    return 0;
+double factorial(double n) {
+    if (n == 1) return 1;
+    return n * factorial(n - 1);
 }
 
-int read(char *str) {
-    scanf(str);
-    return 0;
+/* Knuth's Up Arrow Notation */
+unsigned int knuth(unsigned int a, unsigned int n, unsigned int b) {
+	if (n == 1) return pow(a,b);
+    if (n >= 1 && b == 0) return 1;
+	return knuth(a, n-1, knuth(a,n,b-1));
 }
 
-__io__ io() {
-    __io__ obj = {
-        .puts = &put,
-        .read = &read
-    };
-    return obj;
+int mod(int a, int m) {
+    if (a % m >= 0) return a % m;
+    return (a % m) + m;
 }
 
-/* Math-Class <math.h...> <impl> */
+/* Vector/Dynamic array <...> <impl> */
 
-typedef struct {
-    int (*fact)(int n);
-    int (*pow)(int n, int k);
-    int (*inf)();
-} __math__;
+#define vec_unpack_(v) \
+  (char**)&(v)->data, &(v)->length, &(v)->capacity, sizeof(*(v)->data)
 
-int fact(int n) {
-    if (n == 1) {
-        return 1;
-    }
-    return n * fact(n - 1);
-}
 
-int lpow(int n, int k) {
-  int res = 1;
-  while (k > 0)
-  {
-    res *= n;
-    --k;
-  }
-  return res;
-}
+#define vec_t(T) \
+  struct { T *data; int length, capacity; }
 
-int inf() {
-    return ~(1<<31);
-}
 
-__math__ math() {
-    __math__ obj = {
-        .fact = &fact,
-        .pow  = &lpow,
-        .inf  = &inf
-    };
-    return obj;
-}
+#define vec_init(v) \
+  memset((v), 0, sizeof(*(v)))
 
-/* String-Class <str(s).h> <impl> */
 
-typedef struct {
-    int  (*strlen)(char* str);
-    void (*strcpy)(char* dest, char* src);
-    bool (*strcmp)(char* a, char* b);
-    void (*stradd)(char* base, char* extension);
-    void (*strcls)(char* str);
-    char (*char_to_upper)(char character);
-    void (*strupp)(char* str);
-} __str__;
+#define vec_deinit(v) \
+  ( free((v)->data),  \
+    vec_init(v) ) 
 
-int lstrlen(char* str) {
-    int length = 0;
-    while (*str != 0) {
-        ++length;
-        ++str;
-    }
-    return length;
-}
 
-void lstrcpy(char* dest, char* src) {
-    int size = strlen(src) + 1;
-    for (int i = 0; i < size; ++i) {
-        dest[i] = src[i];
-    }
-}
+#define vec_push(v, val)               \
+  ( vec_expand_(vec_unpack_(v)) ? -1 : \
+    ((v)->data[(v)->length++] = (val), 0), 0 )
 
-bool lstrcmp(char* a, char* b) {
-    int i = 0;
-    while (1) {
-        if (a[i] != b[i]) {
-            return false;
-        }
-        else if (a[i] == 0 && b[i] == 0) {
-            return true;
-        }
-    ++i;
-    }
-}
 
-void lstradd(char* base, char* extension) {
-    strcpy(base + strlen(base), extension);
-}
+#define vec_pop(v) \
+  (v)->data[--(v)->length]
 
-void lstrcls(char* str) {
-    while (*str != 0) {
-        *str = 0;
-        ++str;
-    }
-}
 
-char lchar_to_upper(char character) {
-    char offset = 'A' - 'a';
-    if (character >= 'a' && character <= 'z') {
-        return character + offset;
-    }
-    return character;
-}
+#define vec_splice(v, start, count)            \
+  ( vec_splice_(vec_unpack_(v), start, count), \
+    (v)->length -= (count) )
 
-void lstrupp(char* str) {
-    while (*str != 0) {
-        *str = lchar_to_upper(*str);
-        ++str;
-    }
-}
 
-__str__ str() {
-    __str__ obj = {
-        .strlen        = &lstrlen,
-        .strcpy        = &lstrcpy,
-        .strcmp        = &lstrcmp,
-        .stradd        = &lstradd,
-        .strcls        = &lstrcls,
-        .char_to_upper = &lchar_to_upper,
-        .strupp        = &lstrupp
-    };
-    return obj;
-}
+#define vec_swapsplice(v, start, count)            \
+  ( vec_swapsplice_(vec_unpack_(v), start, count), \
+    (v)->length -= (count) )
 
-/* System-Class <stdlib.h?...> <wrapper> */
 
-typedef struct {
-    int   (*cmd)(char *self);
-} __sys__;
+#define vec_insert(v, idx, val)             \
+  ( vec_insert_(vec_unpack_(v), idx) ? -1 : \
+    ((v)->data[idx] = (val), 0), (v)->length++, 0 )
+    
 
-int cmd(char *self) {
-    system(self);
-    return 0;
-}
+#define vec_sort(v, fn) \
+  qsort((v)->data, (v)->length, sizeof(*(v)->data), fn)
 
-__sys__ sys() {
-    __sys__ obj = {
-        .cmd  = &cmd,
-    };
-    return obj;
-}
+
+#define vec_swap(v, idx1, idx2) \
+  vec_swap_(vec_unpack_(v), idx1, idx2)
+
+
+#define vec_truncate(v, len) \
+  ((v)->length = (len) < (v)->length ? (len) : (v)->length)
+
+
+#define vec_clear(v) \
+  ((v)->length = 0)
+
+
+#define vec_first(v) \
+  (v)->data[0]
+
+
+#define vec_last(v) \
+  (v)->data[(v)->length - 1]
+
+
+#define vec_reserve(v, n) \
+  vec_reserve_(vec_unpack_(v), n)
+
+ 
+#define vec_compact(v) \
+  vec_compact_(vec_unpack_(v))
+
+
+#define vec_pusharr(v, arr, count)                                       \
+  do {                                                                   \
+    int i__, n__ = (count);                                              \
+    if (vec_reserve_po2_(vec_unpack_(v), (v)->length + n__) != 0) break; \
+    for (i__ = 0; i__ < n__; i__++) {                                    \
+      (v)->data[(v)->length++] = (arr)[i__];                             \
+    }\
+  } while (0)
+
+
+#define vec_extend(v, v2) \
+  vec_pusharr((v), (v2)->data, (v2)->length)
+
+
+#define vec_find(v, val, idx)                       \
+  do {                                              \
+    for ((idx) = 0; (idx) < (v)->length; (idx)++) { \
+      if ((v)->data[(idx)] == (val)) break;         \
+    }                                               \
+    if ((idx) == (v)->length) (idx) = -1;           \
+  } while (0)
+
+
+#define vec_remove(v, val)                    \
+  do {                                        \
+    int idx__;                                \
+    vec_find(v, val, idx__);                  \
+    if (idx__ != -1) vec_splice(v, idx__, 1); \
+  } while (0)
+
+
+#define vec_reverse(v)                             \
+  do {                                             \
+    int i__ = (v)->length / 2;                     \
+    while (i__--) {                                \
+      vec_swap((v), i__, (v)->length - (i__ + 1)); \
+    }                                              \
+  } while (0)
+
+
+#define vec_foreach(v, var, iter)                                 \
+  if  ( (v)->length > 0 )                                         \
+  for ( (iter) = 0;                                               \
+        (iter) < (v)->length && (((var) = (v)->data[(iter)]), 1); \
+        ++(iter))
+
+
+#define vec_foreach_rev(v, var, iter)                    \
+  if  ( (v)->length > 0 )                                \
+  for ( (iter) = (v)->length - 1;                        \
+        (iter) >= 0 && (((var) = (v)->data[(iter)]), 1); \
+        --(iter))
+
+
+#define vec_foreach_ptr(v, var, iter)                              \
+  if  ( (v)->length > 0 )                                          \
+  for ( (iter) = 0;                                                \
+        (iter) < (v)->length && (((var) = &(v)->data[(iter)]), 1); \
+        ++(iter))
+
+
+#define vec_foreach_ptr_rev(v, var, iter)                 \
+  if  ( (v)->length > 0 )                                 \
+  for ( (iter) = (v)->length - 1;                         \
+        (iter) >= 0 && (((var) = &(v)->data[(iter)]), 1); \
+        --(iter))
 
 #endif
