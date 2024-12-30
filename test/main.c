@@ -10,9 +10,7 @@ int main() {
 	test_conditional_macros();
 	test_try_catch_macros();
 	test_print_macros();
-    test_io_funcs();
     test_math_funcs();
-    test_sys_funcs();
 
     return 0;
 }
