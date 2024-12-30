@@ -1,22 +1,7 @@
 # Lazy
-Lazy is basically STDI. While that may sound like some horrid disease, look
-at this data I found from a totally-not-sketchy-at-all-website:
-```
-===== Most Common "STDI" Abbreveations =====
-
-- Short-Term Disability Insurance
-- Occupational Health, Workplace, Medical
-- Synthetic Training Device Instructor
-- Science and Technology Diplomacy Initiative
-- Information, Technology, Computer
-- Sekolah Tinggi Desain Indonesia
-- Small Town Design Initiative
-- Small Towns Development Initiative
-- Southwest Technology Development Institute
-- Stereo Tube Direct Interface
-- Systolic Time Diameter Index
-```
-But at the very bottom of the list I have added a new one: `[C] STDlib Improved`!
+Lazy is basically just a lirary full of functions I'm to... Well, lazy, to write again.
+With things like `try/catch` and `vectors` this surely makes it the best library for
+lazy C programmers that have nothing better to do than read a README (like you!).
 
 ## History
 So this thing started back in the 1800s when I was figuring out C for the first time,
