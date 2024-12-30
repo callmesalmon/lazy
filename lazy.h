@@ -179,6 +179,8 @@ static void * pretty_allocpy(size_t size, void *contents) {
 #define new(type, ...)                                                  \
         (type *) pretty_allocpy(sizeof(type), &((type) {__VA_ARGS__}))
 
+/* Btw there is a better implementation, down below,
+ * keeping this in for historical purposes. */
 #define vector(length, type, ...)                               \
         (type*) pretty_allocpy(sizeof(type) * length,           \
                                (type[length]){__VA_ARGS__})
