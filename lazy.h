@@ -250,10 +250,14 @@ typedef unsigned long  ulong;
 
 /* Boolean <...> <impl> <pretty> */
 
+#if !defined(__cplusplus)
+
 typedef unsigned int bool;
 
 #define true  (bool)1
 #define false (bool)0
+
+#endif
 
 /* Len-Macro <...> <impl> <pretty> */
 
