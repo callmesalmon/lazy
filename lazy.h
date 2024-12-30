@@ -225,19 +225,11 @@ static int pretty_err_part_of(int err, size_t length, int *errs) {
                          _Generic((__VA_ARGS__),                        \
                                   char*:              "%s",		\
                                   char:               "%c",		\
-                                  signed char:        "%hhi",		\
                                   short:              "%hi",		\
                                   int:                "%i",		\
                                   long:               "%li",		\
-                                  long long:          "%lli",		\
-                                  unsigned char:      "%hhu",		\
-                                  unsigned short:     "%hi",		\
-                                  unsigned int:       "%u",		\
-                                  unsigned long:      "%lu",		\
-                                  unsigned int: "%llu",		\
                                   float:              "%g",		\
                                   double:             "%g",		\
-                                  long double:        "%Lg",		\
                                   default:            "%p"),		\
                          (__VA_ARGS__)))
 #define println(...)				\
