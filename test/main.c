@@ -11,6 +11,9 @@ int main() {
 	test_try_catch_macros();
 	test_print_macros();
     test_math_funcs();
+    test_python_macros();
+    test_function_macros();
+    test_lua_macros;
 
     return 0;
 }
