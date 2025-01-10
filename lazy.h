@@ -16,6 +16,22 @@
  *             derives from the "Pretty C" module for C. Check
  *             Pretty C out at <github.com/aartaka/pretty.c>. */
 
+/* Debug <pre> */
+#define DEBUG(msg)
+#ifndef LAZY_DEBUG
+# undef  DEBUG
+# define DEBUG(msg) printf("%s\n", msg);
+#endif
+
+/* Checks <pre> */
+#ifndef LAZY_NO_WARN
+# ifdef __cplusplus
+#  warning "You are running lazy on C++."
+#  warning "Therefore, some functions will not work."
+#  warning "Define ``LAZY_NO_WARN`` to hide this message"
+# endif
+#endif
+
 /* "Predicates" <...> <impl> <pretty> */
 
 #define even     0 == 1 &
