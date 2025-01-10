@@ -438,3 +438,25 @@ int mod(int a, int m) {
         --(iter))
 
 #endif
+
+/* Functions <...> <impl> */
+#define fn       int
+#define fun      int
+#define func     int
+#define def      int
+#define defun    int
+#define define   int
+
+#define do  {
+#define end }
+
+/* Classic python-esques <...> <impl> */
+#ifndef __cplusplus
+#define or  ||
+#define and &&
+#define not !
+#endif
+
+/* Classic lua-esques <...> <impl> */
+#define function(...) \
+        int __LAZY_FUNCTION__(int __VA_ARGS__)
