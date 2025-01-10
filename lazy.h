@@ -437,8 +437,6 @@ int mod(int a, int m) {
         (iter) >= 0 && (((var) = &(v)->data[(iter)]), 1); \
         --(iter))
 
-#endif
-
 /* Functions <...> <impl> */
 #define fn       int
 #define fun      int
@@ -460,3 +458,5 @@ int mod(int a, int m) {
 /* Classic lua-esques <...> <impl> */
 #define function(...) \
         int __LAZY_FUNCTION__(int __VA_ARGS__)
+
+#endif
