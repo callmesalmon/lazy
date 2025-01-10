@@ -475,4 +475,93 @@ int mod(int a, int m) {
 #define function(...) \
         int __LAZY_FUNCTION__(int __VA_ARGS__)
 
+
+/* Enum <Elixir::Enum, ~Cpp::std> <impl> */ 
+typedef struct {
+    char* key;
+    int value;
+} KeyValue;
+
+typedef struct {
+    KeyValue* pairs;
+    int size;
+    int capacity;
+} Map;
+
+Map* makeMap() {
+    Map* m = (Map*)malloc(sizeof(Map));
+    m->pairs = NULL;
+    m->size = 0;
+    m->capacity = 0;
+    return m;
+}
+
+void setKeyValue(Map* m, const char* key, int value) {
+    for (int i = 0; i < m->size; i++) {
+        if (strcmp(m->pairs[i].key, key) == 0) {
+            m->pairs[i].value = value;
+            return;
+        }
+    }
+    
+    if (m->size == m->capacity) {
+        m->capacity = m->capacity == 0 ? 1 : m->capacity * 2;
+        m->pairs = (KeyValue*)realloc(m->pairs, m->capacity * sizeof(KeyValue));
+    }
+    
+    m->pairs[m->size].key = strdup(key);
+    m->pairs[m->size].value = value;
+    m->size++;
+}
+
+int getValue(Map* m, const char* key, int* found) {
+    for (int i = 0; i < m->size; i++) {
+        if (strcmp(m->pairs[i].key, key) == 0) {
+            *found = 1;
+            return m->pairs[i].value;
+        }
+    }
+    *found = 0;
+    return 0;
+}
+
+void deleteKeyValue(Map* m, const char* key) {
+    for (int i = 0; i < m->size; i++) {
+        if (strcmp(m->pairs[i].key, key) == 0) {
+            free(m->pairs[i].key);
+            for (int j = i; j < m->size - 1; j++) {
+                m->pairs[j] = m->pairs[j + 1];
+            }
+            m->size--;
+            return;
+        }
+    }
+}
+
+void clearMap(Map* m) {
+    for (int i = 0; i < m->size; i++) {
+        free(m->pairs[i].key);
+    }
+    free(m->pairs);
+    m->pairs = NULL;
+    m->size = 0;
+    m->capacity = 0;
+}
+
+void printMap(Map* m) {
+    printf("map: {");
+    for (int i = 0; i < m->size; i++) {
+        printf("%s:%d", m->pairs[i].key, m->pairs[i].value);
+        if (i < m->size - 1) {
+            printf(" ");
+        }
+    }
+    printf("}\n");
+}
+
+typedef struct node {
+  int data;
+  struct node* next;
+} Node;
+
 #endif
