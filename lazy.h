@@ -564,4 +564,10 @@ typedef struct node {
   struct node* next;
 } Node;
 
+#define at(start, index)                \
+        Node now = start;               \
+        for (int i = 0; i < index; i++) \
+             now = now->next;           \
+        now;
+
 #endif
