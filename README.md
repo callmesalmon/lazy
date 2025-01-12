@@ -1,5 +1,5 @@
 # Lazy
-Lazy is basically just a lirary full of functions I'm to... Well, lazy, to write again.
+Lazy is basically just a library full of functions I'm to... Well, lazy, to write again.
 With things like `try/catch` and `vectors` this surely makes it the best library for
 lazy C programmers that have nothing better to do than read a README (like you!).
 
