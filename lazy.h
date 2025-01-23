@@ -570,4 +570,11 @@ typedef struct node {
              now = now->next;           \
         now;
 
+/* Misc-macros <impl> <...> */
+#define jmp  goto
+#define jump goto
+
+#define nw (uchar)0x0a /* \n */
+#define cr (uchar)0x0d /* \r */
+
 #endif
