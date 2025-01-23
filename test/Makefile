@@ -1,8 +1,8 @@
-CC=gcc
-CFLAGS=-I..
+CC     = clang
+CFLAGS = -I..
 
-SRC=./main.c
-TARGET=./example
+SRC    = ./main.c
+TARGET = ./example
 
 all: $(TARGET)
 
