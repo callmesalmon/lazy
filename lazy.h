@@ -461,8 +461,8 @@ int mod(int a, int m) {
 #define defun    int
 #define define   int
 
-#define do  {
-#define end }
+#define begin {
+#define end   }
 
 /* Classic python-esques <...> <impl> */
 #ifndef __cplusplus
