@@ -574,7 +574,7 @@ typedef struct node {
 #define jmp  goto
 #define jump goto
 
-#define nw (uchar)0x0a /* \n */
+#define nl (uchar)0x0a /* \n */
 #define cr (uchar)0x0d /* \r */
 
 #endif
