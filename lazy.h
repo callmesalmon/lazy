@@ -186,7 +186,7 @@
 /* Easy Resource & Array Allocation <...> <impl> <pretty> */
 
 
-static void * pretty_allocpy(size_t size, void *contents) {
+static void *pretty_allocpy(size_t size, void *contents) {
 	char *allocated = (char *)malloc(size);
 	memcpy(allocated, contents, size);
 	return allocated;
