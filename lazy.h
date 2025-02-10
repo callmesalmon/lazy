@@ -570,7 +570,6 @@ typedef struct node {
         for (int j = 0; j < len(arr); j++)      \
             if (i == arr[j]) if (true)          \
 
-
 /* Flag parser example:
  *
  *     int main(flagargs) {
