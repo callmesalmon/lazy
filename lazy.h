@@ -294,22 +294,8 @@ typedef unsigned int bool;
 #define min(a, b) ((a) > (b) ? (b) : (a))
 #define max(a, b) ((a) < (b) ? (b) : (a))
 
-double factorial(double n) {
-    if (n == 1) return 1;
-    return n * factorial(n - 1);
-}
-
-/* Knuth's Up Arrow Notation */
-unsigned int knuth(unsigned int a, unsigned int n, unsigned int b) {
-	if (n == 1) return pow(a,b);
-    if (n >= 1 && b == 0) return 1;
-	return knuth(a, n-1, knuth(a,n,b-1));
-}
-
-int mod(int a, int m) {
-    if (a % m >= 0) return a % m;
-    return (a % m) + m;
-}
+#define square(x) (x * x)
+#define cube(x)   (x * x * x)
 
 /* Vector/Dynamic array <...> <impl> */
 
