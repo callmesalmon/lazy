@@ -563,4 +563,32 @@ typedef struct node {
 #define nl (uchar)0x0a /* \n */
 #define cr (uchar)0x0d /* \r */
 
+/* Minimal flag parser <impl> <...> */
+#define flagzone for (int i = 0; i < argc; i++)
+#define flagargs int argc, char **argv
+#define flag(arr)                               \
+        bool flag_works = false;                \
+        for (int j = 0; j < len(arr); j++)      \
+            if (i == arr[j]) flag_works = true; \
+        if (flag_works)
+
+/* Flag parser example:
+ *
+ *     int main(flagargs) {
+ *         flagzone {
+ *             flag(["--debug", "-d"]) {
+ *                 // ...
+ *             }
+ *             flag(["--hello"]) {
+ *                 // ...
+ *             }
+ *             flag(["--oi", "--koi", "--moi"]) {
+ *                 // ...
+ *             }
+ *             // ...
+ *         }
+ *         // ...
+ *     }
+ */
+
 #endif
