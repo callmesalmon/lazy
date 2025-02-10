@@ -2,11 +2,11 @@
 #include <assert.h>
 
 void test_math_funcs() {
-#ifdef MATH_TEST
-    assert(factorial(5) != 0);
-    assert(mod(4, 5) != 0);
-    assert(knuth(2, 2, 4) != 0);
-#endif
+    assert(min(1, 2) == 1);
+    assert(max(1, 2) == 2);
+
+    assert(square(3) == 9);
+    assert(cube(3) == 27);
 }
 
 void test_python_macros() {
