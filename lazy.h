@@ -567,22 +567,21 @@ typedef struct node {
 #define flagzone for (int i = 0; i < argc; i++)
 #define flagargs int argc, char **argv
 #define flag(arr)                               \
-        bool flag_works = false;                \
         for (int j = 0; j < len(arr); j++)      \
-            if (i == arr[j]) flag_works = true; \
-        if (flag_works)
+            if (i == arr[j]) if (true)          \
+
 
 /* Flag parser example:
  *
  *     int main(flagargs) {
  *         flagzone {
- *             flag(["--debug", "-d"]) {
+ *             flag({"--debug", "-d"}) {
  *                 // ...
  *             }
- *             flag(["--hello"]) {
+ *             flag({"--hello"}) {
  *                 // ...
  *             }
- *             flag(["--oi", "--koi", "--moi"]) {
+ *             flag({"--oi", "--koi", "--moi"}) {
  *                 // ...
  *             }
  *             // ...

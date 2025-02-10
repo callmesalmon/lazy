@@ -2,7 +2,7 @@ CC     = clang
 CFLAGS = -I..
 
 SRC    = ./main.c
-TARGET = ./example
+TARGET = ./test
 
 all: $(TARGET)
 

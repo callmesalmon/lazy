@@ -77,7 +77,7 @@ test_try_catch_macros()
 {
 	errno = 0;
 	try {
-		sqrt(-1);
+        println(NULL);
 	}
 	catch(EDOM) {
 		assert(errno == EDOM);

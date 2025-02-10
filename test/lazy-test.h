@@ -21,6 +21,6 @@ void test_python_macros() {
     return 256;                       \
 end;                                  \
 
-fn test_function_macros() do
+fn test_function_macros() {
     return 0;
-end
+}
