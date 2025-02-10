@@ -41,10 +41,19 @@ And thus, `lazy(.h)` was born!
 #include <errno.h>
 #include <assert.h>
 
-int main(int argc, char **argv) {
+int main(flagargs) {
+    flagzone {
+        flag({"--debug", "-d"}) {
+            println("System: Debug mode activated!")
+        }
+        flag({"--die", "X_X"}) {
+            println("System: I'm dying nooo X_X");
+            return -1;
+        }
+    }
     errno = 0;
     try {
-        print("Hello World!");
+        println("Hello World!");
     } catch(EDOM) {
         assert(errno = EDOM);
     }
