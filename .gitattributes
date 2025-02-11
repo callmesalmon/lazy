@@ -1,0 +1,3 @@
+*.[ch]    linguist-language=C        diff=C
+*.sh      linguist-language=bash     diff=bash
+Makefile  linguist-language=Makefile diff=Makefile
