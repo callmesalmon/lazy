@@ -632,4 +632,29 @@ typedef struct node {
  *     }
  */
 
+/* Micro-Assert <...>,
+ *
+ * This works as a macro where
+ * expr = any logical expression
+ * (ex.: (2+2 == 5)), and asserts
+ * that expr is true, e.g:
+ *
+ *     (expr) ? true : false
+ *
+ * If expr is not true, we error out.
+ * As this macro can only be called
+ * within a function, simply returning
+ * a NULL value should do the trick.
+ * Example usage being
+ *
+ *     int main() {
+ *         massert((2 + 2) == (5));
+ *         return 0;
+ *     }
+ */
+#define massert(expr)                                        \
+        !(expr) ?                                            \
+            println("ERROR: %s evaluated to false.", #expr)  \
+        only
+
 #endif
