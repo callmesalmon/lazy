@@ -606,31 +606,41 @@ typedef struct node {
 #define plen(p) (sizeof(p) / sizeof(*p))
 #define alen(a) (sizeof(a) / sizeof(a[0]))
 
-/* Minimal flag parser <impl> <...> */
+/* Minimal flag parser <...>,
+ *
+ * It works by defining a "zone"
+ * annotated as a "flagzone" in which
+ * you define your flags. It is in reality
+ * just a for-loop in disguise, e.g:
+ *
+ *     for (int i = 0; i < argc; i++)
+ *
+ * Which can then be applied to command-line
+ * arguments using ``argv[i]``. The "flagargs"
+ * macro works as the parameters for a "main"
+ * function in modern c17, e.g "int argc,
+ * char **argv", ex.:
+ *
+ *     int main(flagargs)
+ *     -> int main(int argc, char **argv)
+ *
+ * The flag macro operates as the "flag-checker",
+ * it takes in a parameter (annotated as "arr")
+ * which is an array where every element is a
+ * different annotation of the flag,
+ * therefore "flag({...})" is the
+ * correct syntax. It is just using
+ * !strcmp, but it's cool nonetheless, ex.:
+ *
+ *     flag({"--debug", "-d"}) {
+ *         println("System: Debug mode activated!");
+ *     }
+ */
 #define flagzone for (int i = 0; i < argc; i++)
 #define flagargs int argc, char **argv
 #define flag(arr)                                \
         for (int j = 0; j < alen(arr); j++)      \
             if (!strcmp(arr[j], argv[i]))        \
-
-/* Flag parser example:
- *
- *     int main(flagargs) {
- *         flagzone {
- *             flag({"--debug", "-d"}) {
- *                 // ...
- *             }
- *             flag({"--hello"}) {
- *                 // ...
- *             }
- *             flag({"--oi", "--koi", "--moi"}) {
- *                 // ...
- *             }
- *             // ...
- *         }
- *         // ...
- *     }
- */
 
 /* Micro-Assert <...>,
  *
