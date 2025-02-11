@@ -69,12 +69,12 @@
 
 /* Ternaries & Conditionals <...> <impl> <pretty> */
 
-#define ifnt(...)   if(!(__VA_ARGS__))
-#define ifnot(...)  if(!(__VA_ARGS__))
-#define elif        else if
-#define elifnt(...) else if(!(__VA_ARGS__))
+#define ifnt(...)    if(!(__VA_ARGS__))
+#define ifnot(...)   if(!(__VA_ARGS__))
+#define elif         else if
+#define elifnt(...)  else if(!(__VA_ARGS__))
 #define elifnot(...) else if(!(__VA_ARGS__))
-#define when
+
 #define unless      !
 #define then        ?
 #define other       :
