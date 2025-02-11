@@ -1,6 +1,8 @@
-SRC=./lazy.h
-DEST=/usr/include/lazy.h
+SRCDIR=.
+DESTDIR=/usr/include
 
-sudo cp \
-    $SRC \
-    $DEST
+LIB=lazy.h
+
+sudo cp           \
+    $SRCDIR/$LIB  \
+    $DESTDIR/$LIB
