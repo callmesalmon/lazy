@@ -313,6 +313,30 @@ typedef unsigned int bool;
 #define square(x) (x * x)
 #define cube(x)   (x * x * x)
 
+#define facto(n)  ((!n) ? n : n * facto(n - 1))
+
+/* This is only really put in here for the
+ * possibility of infinity. I made a blog
+ * post about this form of infinity that
+ * can be found at
+ *
+ *     https://elisstaaf.github.io/ramblings/2025/01/31/infinity.html
+ */
+double divide(double x, double y) {
+    return x / y;
+}
+
+/* It all boils down to
+ *
+ *     x / y for x = 10, y = 0:
+ *         x / 0 = undefined ≈ inf
+ *
+ * Which is annotated in C as
+ *
+ *     #define inf divide(10, 0)
+ */
+#define inf divide(10, 0)
+
 /* Vector/Dynamic array <...> <impl> */
 
 #define vec_unpack_(v) \
