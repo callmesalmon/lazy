@@ -4,6 +4,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <errno.h>
+#include <string.h>
 
 #include "pretty-test.h"
 #include "lazy-test.h"

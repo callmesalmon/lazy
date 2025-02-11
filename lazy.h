@@ -563,12 +563,15 @@ typedef struct node {
 #define nl (uchar)0x0a /* \n */
 #define cr (uchar)0x0d /* \r */
 
+#define plen(p) (sizeof(p) / sizeof(*p))
+#define alen(a) (sizeof(a) / sizeof(a[0]))
+
 /* Minimal flag parser <impl> <...> */
 #define flagzone for (int i = 0; i < argc; i++)
 #define flagargs int argc, char **argv
-#define flag(arr)                               \
-        for (int j = 0; j < len(arr); j++)      \
-            if (i == arr[j]) if (true)          \
+#define flag(arr)                                \
+        for (int j = 0; j < alen(arr); j++)      \
+            if (!strcmp(arr[j], argv[i]))        \
 
 /* Flag parser example:
  *

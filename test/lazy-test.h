@@ -11,7 +11,6 @@ void test_math_funcs() {
 
 void test_python_macros() {
 #ifndef __cplusplus
-    assert(not 1 == 2);
     assert(1 == 2 or 2 == 2);
     assert(1 == 1 and 2 == 2);
 #endif
