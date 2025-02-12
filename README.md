@@ -55,7 +55,7 @@ int main(flagargs) {
     try {
         println("Hello World!");
     } catch(EDOM) {
-        assert(errno = EDOM);
+        assert(errno == EDOM);
     }
     return 0;
 }
