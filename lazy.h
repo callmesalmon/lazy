@@ -355,6 +355,14 @@ typedef unsigned int bool;
 #define square(x) (x * x)     /* x ^ 2 */
 #define cube(x)   (x * x * x) /* x ^ 3 */
 
+/* Ctrl-key <impl>,
+ *
+ * Mimics the behaviour of the Ctrl key by using 0x1f as a memory
+ * address to shift the last 3 bits to 0. I don't know how
+ * it works either! Don't ask me!
+ */
+#define ctrl(k) ((k) & 0x1f)
+
 /* Factorial, calculated using
  *
  *     x! = x * (x-1)!
