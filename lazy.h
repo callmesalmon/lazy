@@ -32,11 +32,22 @@
  *             derives from the "Pretty C" module for C. Check
  *             Pretty C out at <github.com/aartaka/pretty.c>. */
 
-/* Debug <pre> */
-#define DEBUG(msg)
+/* Debug <pre>,
+ *
+ * if you want to enable lazy's
+ * debug mode, simply type
+ *
+ * #define LAZY_DEBUG
+ *
+ * into your program. This
+ * enables some important
+ * debug messages.
+ */
+#define DEBUG(...)
 #ifndef LAZY_DEBUG
 # undef  DEBUG
-# define DEBUG(msg) printf("%s\n", msg);
+# define DEBUG(...) \
+        printf(__VA_ARGS__);
 #endif
 
 /* Checks <pre> */
@@ -209,11 +220,13 @@ static void *pretty_allocpy(size_t size, void *contents) {
 }
 
 #define new(type, ...)                                                  \
+        DEBUG("type: %s\n", #type)                                      \
         (type *) pretty_allocpy(sizeof(type), &((type) {__VA_ARGS__}))
 
 /* Btw there is a better implementation, down below,
  * keeping this in for historical purposes. */
 #define vector(length, type, ...)                               \
+        DEBUG("type: %s\n", #type)                              \
         (type*) pretty_allocpy(sizeof(type) * length,           \
                                (type[length]){__VA_ARGS__})
 
@@ -313,7 +326,23 @@ typedef unsigned int bool;
 #define square(x) (x * x)
 #define cube(x)   (x * x * x)
 
-#define facto(n)  ((!n) ? n : n * facto(n - 1))
+/* Factorial, calculated using
+ *
+ *     x! = x * (x-1)!
+ *
+ * and is calculated using recursion,
+ * e.g:
+ *
+ *     f(n) = { n = 1: n, n * f(n - 1) }
+ *
+ * So then, for example
+ *
+ *     f(5) = 5 * f(4) =
+ *     5 * 4 * f(3) = ...
+ *
+ * is how you'd calculate a factorial.
+ */
+#define f(n)  ((n) ? n : n * f(n - 1))
 
 /* This is only really put in here for the
  * possibility of infinity. I made a blog
