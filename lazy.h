@@ -304,7 +304,36 @@ typedef unsigned int bool;
 
 #endif
 
-/* Len-Macro <...> <impl> <pretty> */
+/* Len-Macro <...> <impl> <pretty>,
+ *
+ * What this does is that it basically
+ * calculates the length (L) of an array
+ * (or under specific conditions)
+ * a string. It's a macro with argument
+ * ... (annotated as "a") where
+ *
+ * a = (if (__STDC_VERSION >= 201112L): string|arr,
+ *      else: arr)
+ *
+ * If a = string, we use strlen(a) (S)
+ * to get the length of a. If a is an array, we use
+ * the clever sizeof(a) / sizeof(a[0]) (Z)
+ * trick. Example:
+ *
+ *     #include <lazy.h>
+ *
+ *     int main() {
+ *         string a = "Hello World!"; // S = 11
+ *         println(len(a));           // L = 11
+ *
+ *         // THE FOLLOWING ONLY WORKS
+ *         // IF __STDC_VERSION >= 201112L:
+ *
+ *         int b[] = {8, 33, 89, 49,
+ *                    23, 49, 23}; // Z = 7
+ *         println(len(b));        // L = 7
+ *     }
+ */
 
 #if __STDC_VERSION__ >= 201112L
 #define len(...)                                                        \
@@ -320,11 +349,11 @@ typedef unsigned int bool;
 
 /* Miscellanous math <math.h,...> <impl> */
 
-#define min(a, b) ((a) > (b) ? (b) : (a))
-#define max(a, b) ((a) < (b) ? (b) : (a))
+#define min(a, b) ((a) > (b) ? (b) : (a)) /* if a > b: b, a */
+#define max(a, b) ((a) < (b) ? (b) : (a)) /* if a > b: a, b */
 
-#define square(x) (x * x)
-#define cube(x)   (x * x * x)
+#define square(x) (x * x)     /* x ^ 2 */
+#define cube(x)   (x * x * x) /* x ^ 3 */
 
 /* Factorial, calculated using
  *
