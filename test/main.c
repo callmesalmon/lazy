@@ -6,7 +6,6 @@
 #include <errno.h>
 #include <string.h>
 
-#include "pretty-test.h"
 #include "lazy-test.h"
 
 int main(flagargs) {
@@ -28,9 +27,9 @@ int main(flagargs) {
 	test_conditional_macros();
 	test_try_catch_macros();
 	test_print_macros();
-    test_math_funcs();
+    test_math_macros();
     test_python_macros();
-    test_function_macros();
+    test_assert_macro();
 
     return 0;
 }

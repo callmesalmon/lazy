@@ -2,7 +2,7 @@ CC     = clang
 CFLAGS = -I..
 
 SRC    = ./main.c
-LIB    = ./lazy-test.h ./pretty-test.h
+LIB    = ./lazy-test.h
 
 TARGET = ./test
 
