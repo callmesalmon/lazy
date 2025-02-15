@@ -72,6 +72,7 @@
 #define positive 0 <
 #define negative 0 >
 #define neutral  0 ==
+#define zero     0 ==
 #define empty    NULL ==
 #define null     NULL ==
 
@@ -83,6 +84,11 @@
 #define lt <
 #define ge >=
 #define le <=
+
+/* Function success/failure <...> <impl> <pretty> */
+
+#define success 0 ==
+#define failure 0 !=
 
 /* Standard logic <...> <impl> <pretty> */
 
@@ -758,7 +764,7 @@ typedef struct node {
         for (int j = 0; j < alen(arr); j++)      \
             if (!strcmp(arr[j], argv[i]))        \
 
-/* Micro-Assert <...>,
+/* Micro-Assert <assert.h> <impl>,
  *
  * This works as a macro where
  * expr = any logical expression
