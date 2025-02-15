@@ -764,10 +764,33 @@ typedef struct node {
 
 /* I/O macros <impl> */
 
+/* printf(__VA_ARGS__), printf("\n"); */
 #define printfln(...) \
         printf(__VA_ARGS__);  \
         printf("\n");
 
+/* An advanced function that kind of works
+ * like the python "input()" function,
+ * but this one is better. It firstly
+ * prints a prompt (p), where the
+ * user enters a message that gets
+ * read into a variable (v). It uses
+ * scanf(), but automatically decides
+ * on the format (ex.: "%s") of the
+ * variable, basically:
+ *
+ *     scanf(_Generic((v), ...), &v)
+ *
+ * This makes the function much
+ * easier to use, as it includes
+ * auto type detection. Example being
+ *
+ *     int num;
+ *     input(">", num);
+ *     -> printf("%s", ">");
+ *        scanf(_Generic((num), ...),
+ *              &num);
+ */
 #define input(prompt, vari)              \
         printf("%s", prompt);            \
         scanf(_Generic((vari),           \
