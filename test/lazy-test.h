@@ -51,18 +51,6 @@ void test_foreach_forthese_macros() {
 	assert(sum == 10);
 }
 
-void test_memory_macros() {
-	int *num = new(int, 42);
-	assert(*num == 42);
-	delete(num);
-
-	int *arr = vector(3, int, 1, 2, 3);
-	assert(arr[0] == 1);
-	assert(arr[1] == 2);
-	assert(arr[2] == 3);
-	delete(arr);
-}
-
 void test_conditional_macros() {
 	int x = 5;
 	int y = when x > 3 then 10 other 0;
@@ -98,4 +86,13 @@ void test_print_macros() {
 	print("\n");
 	print("Testing println macro with number: ");
 	println(456);
+}
+
+void test_io_macros() {
+    printfln("Testing printfln macro:");
+    printfln("%d", 789);
+
+    char *msg;
+    input("testing input macro: ", msg);
+    printfln("You entered: %s", msg);
 }

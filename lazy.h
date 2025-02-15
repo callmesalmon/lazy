@@ -17,7 +17,6 @@
 #ifndef __LAZY__
 #define __LAZY__
 
-#include <functional>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -92,7 +91,7 @@
 #define elif         else if
 #define elifnt(...)  else if(!(__VA_ARGS__))
 #define elifnot(...) else if(!(__VA_ARGS__))
-
+#define when
 #define unless      !
 #define then        ?
 #define other       :
@@ -762,5 +761,24 @@ typedef struct node {
         !(expr) ?                                            \
             println("ERROR: %s evaluated to false.", #expr)  \
         only
+
+/* I/O macros <impl> */
+
+#define printfln(...) \
+        printf(__VA_ARGS__);  \
+        printf("\n");
+
+#define input(prompt, vari)              \
+        printf("%s", prompt);            \
+        scanf(_Generic((vari),           \
+                  char*:         "%s",   \
+                  char:          "%c",   \
+                  int:           "%d",   \
+                  double:        "%d",   \
+                  float:         "%f",   \
+                  long int:      "%li",  \
+                  long long int: "%lli", \
+                  default:       "%p"),  \
+              &vari)
 
 #endif
