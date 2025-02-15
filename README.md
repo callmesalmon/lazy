@@ -93,6 +93,6 @@ int main(flagargs) {
 ```sh
 git clone https://github.com/ElisStaaf/lazy
 cd lazy
-sudo ./install.sh
+sudo make
 echo "Enjoy!"
 ```
