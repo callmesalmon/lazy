@@ -84,6 +84,19 @@
 #define ge >=
 #define le <=
 
+/* Bit logic <...> <impl> <pretty> */
+
+#define bitnot ~
+#define bitxor ^
+
+/* Small macros <...> <impl> <pretty> */
+
+#define divisible(n, ...)  ((__VA_ARGS__ == 0) ? 0 : ((n) % (__VA_ARGS__) == 0))
+#define ensure(x, ...)     ((x) ? (x) : (__VA_ARGS__))
+#define limit(lo, n, hi)   ((n) < (lo) ? (lo) : (n) > (hi) ? (hi) : (n))
+#define clamp(lo, n, hi)   limit(lo, n, hi)
+#define between(lo, n, hi) ((n) <= (hi) && (n) => (lo))
+
 /* Ternaries & Conditionals <...> <impl> <pretty> */
 
 #define ifnt(...)    if(!(__VA_ARGS__))
@@ -266,6 +279,8 @@ static int pretty_err_part_of(int err, size_t length, int *errs) {
             (errno,                                             \
              sizeof ((int[]){__VA_ARGS__}) / sizeof(int),       \
              (int[]){__VA_ARGS__}))
+#define NOERROR 0
+#define NOERR   0
 
 /* Print++ (Better Print) <...> <impl> <pretty> */
 
@@ -803,5 +818,37 @@ typedef struct node {
                   long long int: "%lli", \
                   default:       "%p"),  \
               &vari)
+
+
+/* More elegant macros <...> <impl> */
+
+#define nil      NULL
+#define readonly const
+
+/* Lambda <...> <impl> <pretty> */
+
+#if defined(__clang_major__)
+#define lambda(ret, name, ...) void * name = (void*) ^ ret (__VA_ARGS__)
+#elif defined(__GNUC__) || defined(__GNUG__)
+#define lambda(ret, name, ...) ret name (__VA_ARGS__)
+#elif defined(__cplusplus)
+#define lambda(ret, name, ...) auto name = [](__VA_ARGS__)
+#endif
+
+/* In macro <impl> */
+
+bool lazy_in(void *thing, size_t thing_size, size_t total_size, void *things) {
+	char *char_things = (char*)things;
+	for (size_t i = 0; i < total_size; i += thing_size)
+		if (!memcmp(thing, char_things + i, thing_size))
+			return true;
+    return false;
+}
+
+#define in(thing, type, ...)                            \
+        lazy_in((void*)(type[1]){thing},                \
+                  sizeof(type),                         \
+                  sizeof((type[]){__VA_ARGS__}),        \
+                  (void*)(type[]){__VA_ARGS__})
 
 #endif
