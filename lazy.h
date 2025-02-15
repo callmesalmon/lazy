@@ -52,7 +52,12 @@
         printf(__VA_ARGS__);
 #endif
 
-/* Checks <pre> */
+/* C++-checks <pre>,
+ *
+ * can be disabled by
+ * defining "LAZY_NO_WARN"
+ * in your program.
+ */
 #ifndef LAZY_NO_WARN
 # ifdef __cplusplus
 #  warning "You are running lazy on C++."
