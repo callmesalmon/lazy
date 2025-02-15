@@ -84,6 +84,12 @@
 #define ge >=
 #define le <=
 
+/* Standard logic <...> <impl> <pretty> */
+
+#define is    ==
+#define isnt  !=
+#define isnot !=
+
 /* Bit logic <...> <impl> <pretty> */
 
 #define bitnot ~
