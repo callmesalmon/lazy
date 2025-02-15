@@ -17,11 +17,13 @@
 #ifndef __LAZY__
 #define __LAZY__
 
+#include <functional>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
 #include <iso646.h>
+#include <sys/cdefs.h>
 
 /* DISCLAIMER: Some of these are shamelessly stolen from "Pretty C", which
  *             is licensed under the "WTFPL", keep that in mind. Because
@@ -564,10 +566,32 @@ double divide(double x, double y) {
 #define not !
 #endif
 
-/* Classic lua-esques <...> <impl> */
-#define function(...) \
-        int __LAZY_FUNCTION__(int __VA_ARGS__)
-
+/* Lua-function <impl>,
+ *
+ * This basically just exists for
+ * people that want to switch up
+ * their coding style. The params
+ * are name (n) and __VA_ARGS__
+ * (a). "n" is the name of the
+ * function while "a" is the
+ * arguments, meaning
+ *
+ *     int n(a)
+ *
+ * is the official syntax.
+ * An example being
+ *
+ *     function(print, char *msg) {
+ *         printf("%s", msg);
+ *         return 0;
+ *     }
+ *     -> int print(char *msg) {
+ *            printf("%s", msg);
+ *            return 0;
+ *        }
+ */
+#define function(name, ...) \
+        int name(__VA_ARGS__)
 
 /* Enum <Elixir::Enum, ~Cpp::std> <impl> */ 
 typedef struct {
