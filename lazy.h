@@ -385,8 +385,8 @@ typedef unsigned int bool;
 #define min(a, b) ((a) > (b) ? (b) : (a)) /* if a > b: b, a */
 #define max(a, b) ((a) < (b) ? (b) : (a)) /* if a > b: a, b */
 
-#define square(x) (x * x)     /* x ^ 2, ex: square(3) = 9 */
-#define cube(x)   (x * x * x) /* x ^ 3, ex: cube(3) = 27  */
+#define square(x) (x * x)     /* x ^ 2, ex: square(3) = 9   */
+#define cube(x)   (x * x * x) /* x ^ 3, ex: cube(3)   = 27  */
 
 /* Factorial, calculated using
  *
