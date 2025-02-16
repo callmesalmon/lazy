@@ -101,7 +101,7 @@
 #define bitnot ~
 #define bitxor ^
 
-/* Advanced logic <...> <impl> <pretty> */
+/* Advanced logic <...> <impl> */
 
 #define isor(a, b)     ((a)  || (b))
 #define isand(a, b)    ((a)  && (b))
