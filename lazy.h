@@ -101,12 +101,21 @@
 #define bitnot ~
 #define bitxor ^
 
+/* Advanced logic <...> <impl> <pretty> */
+
+#define isor(a, b)     ((a)  || (b))
+#define isand(a, b)    ((a)  && (b))
+#define isnotor(a, b)  (!(a) || !(b))
+#define isnotand(a, b) (!(a) && !(b))
+#define isornot(a, b)  ((a)  || !(b))
+#define isandnot(a, b) ((a)  && !(b))
+
 /* Small macros <...> <impl> <pretty> */
 
 #define divisible(n, ...)  ((__VA_ARGS__ == 0) ? 0 : ((n) % (__VA_ARGS__) == 0))
 #define ensure(x, ...)     ((x) ? (x) : (__VA_ARGS__))
 #define limit(lo, n, hi)   ((n) < (lo) ? (lo) : (n) > (hi) ? (hi) : (n))
-#define clamp(lo, n, hi)   limit(lo, n, hi)
+#define clamp(lo, n, hi)   ((n) < (lo) ? (lo) : (n) > (hi) ? (hi) : (n))
 #define between(lo, n, hi) ((n) <= (hi) && (n) => (lo))
 
 /* Ternaries & Conditionals <...> <impl> <pretty> */
