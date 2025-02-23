@@ -780,7 +780,7 @@ typedef struct node {
  * (ex.: (2+2 == 5)), and asserts
  * that expr is true, e.g:
  *
- *     (expr) ? true : false
+ *     !(expr) ? err() : NULL
  *
  * If expr is not true, we error out.
  * As this macro can only be called
