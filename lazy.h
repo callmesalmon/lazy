@@ -794,7 +794,7 @@ typedef struct node {
  *     }
  */
 #define massert(expr)                                        \
-        !(expr) ?                                            \
+        when !(expr) then                                    \
             println("ERROR: %s evaluated to false.", #expr)  \
         only
 
@@ -871,5 +871,60 @@ bool lazy_in(void *thing, size_t thing_size, size_t total_size, void *things) {
                   sizeof(type),                         \
                   sizeof((type[]){__VA_ARGS__}),        \
                   (void*)(type[]){__VA_ARGS__})
+
+/* Easier error handling <impl>,
+ *
+ * much easier error handling. It's
+ * so easy that I can explain it with
+ * just an example:
+ *
+ * int cmp(int a, int b) {
+ *     return ((a) == (b))
+ *         then 0
+ *         otherwise 1;
+ * }
+ *
+ * int main() {
+ *     err(cmp, 2 + 2, 5) then
+ *         goto fail
+ *     only
+ *
+ *     return 0;
+ *
+ * fail:
+ *     return 1;
+ * }
+ */
+#define err(name, ...)    \
+    (name##(__VA_ARGS__)  \
+        isnot 0)
+
+/* Arrays <...>,
+ *
+ * Why did I make this? Well, it's
+ * prettier? Like, just look at it:
+ *
+ * arr(int, li, 1, 2, 3, 4, 5)
+ * -> int li[] = {1, 2, 3, 4, 5}
+ *
+ * Though, my preferred syntax is
+ *
+ * arr(int, li,
+ * 1, 2, 3, 4, 5)
+ */
+#define arr(type, name, ...)   type name##[] = {__VA_ARGS__}
+#define array(type, name, ...) type name##[] = {__VA_ARGS__}
+#define list(type, name, ...)  type name##[] = {__VA_ARGS__}
+
+/* Arrdef/decl <...>,
+ *
+ * Just a prettier version of
+ * an array declaration. Behold!
+ *
+ * arrdef(int, li) = {1, 2, 3, 4, 5}
+ * -> int li[] = {...}
+ */
+#define arrdef(type, name)  type name##[]
+#define arrdecl(type, name) type name##[]
 
 #endif
