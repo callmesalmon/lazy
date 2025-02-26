@@ -916,15 +916,4 @@ bool lazy_in(void *thing, size_t thing_size, size_t total_size, void *things) {
 #define array(type, name, ...) type name##[] = {__VA_ARGS__}
 #define list(type, name, ...)  type name##[] = {__VA_ARGS__}
 
-/* Arrdef/decl <...>,
- *
- * Just a prettier version of
- * an array declaration. Behold!
- *
- * arrdef(int, li) = {1, 2, 3, 4, 5}
- * -> int li[] = {...}
- */
-#define arrdef(type, name)  type name##[]
-#define arrdecl(type, name) type name##[]
-
 #endif
