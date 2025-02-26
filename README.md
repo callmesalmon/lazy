@@ -68,6 +68,7 @@ And thus, `lazy(.h)` was born!
 #include <lazy.h>
 #include <errno.h>
 #include <assert.h>
+#include <math.h>
 
 int main(flagargs) {
     flagzone {
@@ -81,7 +82,7 @@ int main(flagargs) {
     }
     errno = 0;
     try {
-        println("Hello World!");
+        log(0.0);
     } catch(EDOM) {
         assert(errno == EDOM);
     }
