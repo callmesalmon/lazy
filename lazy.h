@@ -120,11 +120,14 @@
 
 /* Ternaries & Conditionals <...> <impl> <pretty> */
 
-#define ifnt(...)    if(!(__VA_ARGS__))
-#define ifnot(...)   if(!(__VA_ARGS__))
-#define elif         else if
-#define elifnt(...)  else if(!(__VA_ARGS__))
-#define elifnot(...) else if(!(__VA_ARGS__))
+#define ifnt(...)      if(!(__VA_ARGS__))
+#define ifnot(...)     if(!(__VA_ARGS__))
+#define elif           else if
+#define elseif         else if
+#define elifnt(...)    else if(!(__VA_ARGS__))
+#define elseifnt(...)  else if(!(__VA_ARGS__))
+#define elifnot(...)   else if(!(__VA_ARGS__))
+#define elseifnot(...) else if(!(__VA_ARGS__))
 #define when
 #define unless      !
 #define then        ?
@@ -132,6 +135,23 @@
 #define otherwise   :
 #define otherwhen   :
 #define only        : NULL
+
+#define but else
+
+/* returnif <...> <impl>,
+ *
+ * Returns "a" if expression
+ * (__VA_ARGS__) is true,
+ * else, return b. Basically:
+ *
+ *     returnif(0, 256, func() == 0);
+ *     -> return (func() == 0) ?
+ *        0 : 256;
+ */
+#define returnif(a, b, ...)   \
+    return when (__VA_ARGS__) \
+        then a                \
+        otherwise b           \
 
 /* Loops & Blocks <...> <impl> <pretty> */
 
@@ -433,7 +453,11 @@ double divide(double x, double y) {
  *
  * Which is annotated in C as
  *
- *     #define inf divide(10, 0)
+ *     #define inf divide(x, 0)
+ *
+ * With x being anything, I
+ * chose 10 but you don't need
+ * to run x=10.
  */
 #define inf divide(10, 0)
 
@@ -616,22 +640,22 @@ double divide(double x, double y) {
  * function while "a" is the
  * arguments, meaning
  *
- *     int n(a)
+ *     int n(a) {
  *
  * is the official syntax.
  * An example being
  *
- *     function(print, char *msg) {
+ *     function(print, char *msg)
  *         printf("%s", msg);
  *         return 0;
- *     }
+ *     end
  *     -> int print(char *msg) {
  *            printf("%s", msg);
  *            return 0;
  *        }
  */
 #define function(name, ...) \
-        int name(__VA_ARGS__)
+        int name(__VA_ARGS__) {
 
 /* Enum <Elixir::Enum, ~Cpp::std> <impl> */ 
 typedef struct {

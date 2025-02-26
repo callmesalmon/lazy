@@ -92,6 +92,7 @@ void test_io_macros() {
     printfln("Testing printfln macro:");
     printfln("%d", 789);
 
+    /* This part is a *bit* buggy. */
     char *msg;
     input("testing input macro: ", msg);
     printfln("You entered: %s", msg);

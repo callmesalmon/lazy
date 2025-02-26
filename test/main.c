@@ -9,6 +9,7 @@
 #include "lazy-test.h"
 
 int main(flagargs) {
+    /* Flagparser test */
     char *debug[] = {"--debug", "-d"};
     char *hello[] = {"--say-hello", "-s"};
     flagzone {
@@ -20,6 +21,7 @@ int main(flagargs) {
         }
     }
 
+    /* Others... */
 	test_comparison_macros();
 	test_len_macro();
 	test_foreach_forthese_macros();

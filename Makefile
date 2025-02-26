@@ -1,11 +1,13 @@
 all: install
 
-SRCDIR  = .
-LIBDIR  = /usr/include
+PWD     = .
+INC     = /usr/include
 LIB     = lazy.h
 INSTALL = cp
 
 install:
-	@$(INSTALL)          \
-		$(SRCDIR)/$(LIB) \
-		$(LIBDIR)/$(LIB)
+	@echo "Beginning installation..."
+	@$(INSTALL)       \
+		$(PWD)/$(LIB) \
+		$(INC)/$(LIB)
+	@echo "Installation done!"

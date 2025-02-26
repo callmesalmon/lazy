@@ -1,10 +1,12 @@
 CC     = clang
 CFLAGS = -I..
 
-SRC    = ./main.c
-LIB    = ./lazy-test.h
+PWD=.
 
-TARGET = ./test
+SRC    = $(PWD)/main.c
+LIB    = $(PWD)/lazy-test.h
+
+TARGET = $(PWD)/test
 
 all: $(TARGET)
 
