@@ -825,9 +825,10 @@ typedef struct node {
 /* I/O macros <impl> */
 
 /* printf(__VA_ARGS__), printf("\n"); */
-#define printfln(...) \
+#define printfln(...)         \
         printf(__VA_ARGS__);  \
         printf("\n");
+
 
 /* An advanced function that kind of works
  * like the python "input()" function,
