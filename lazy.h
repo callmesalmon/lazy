@@ -433,7 +433,7 @@ typedef unsigned int bool;
  *
  * is how you'd calculate a factorial.
  */
-#define f(n)  ((n) ? n : n * f(n - 1))
+#define f(n)  (n is 1 ? n : n * f(n - 1))
 
 /* This is only really put in here for the
  * possibility of infinity. I made a blog
@@ -466,7 +466,8 @@ double divide(double x, double y) {
  *
  * Mimics the behaviour of the Ctrl key by using 0x1f as a memory
  * address to shift the last 3 bits to 0. I don't know how
- * it works either! Don't ask me!
+ * it works either! Don't ask me! I am only a human
+ * programmer made out of human flesh!
  */
 #define ctrl(k) ((k) & 0x1f)
 
@@ -511,7 +512,7 @@ double divide(double x, double y) {
 #define vec_insert(v, idx, val)             \
   ( vec_insert_(vec_unpack_(v), idx) ? -1 : \
     ((v)->data[idx] = (val), 0), (v)->length++, 0 )
-    
+
 
 #define vec_sort(v, fn) \
   qsort((v)->data, (v)->length, sizeof(*(v)->data), fn)
@@ -730,14 +731,14 @@ void clearMap(Map* m) {
 }
 
 void printMap(Map* m) {
-    printf("map: {");
+    printf("map: {\n");
     for (int i = 0; i < m->size; i++) {
-        printf("%s:%d", m->pairs[i].key, m->pairs[i].value);
+        printf("    %s : %d", m->pairs[i].key, m->pairs[i].value);
         if (i < m->size - 1) {
-            printf(" ");
+            printf("\n");
         }
     }
-    printf("}\n");
+    printf("\n}\n");
 }
 
 typedef struct node {
