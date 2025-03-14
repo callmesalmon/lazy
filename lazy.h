@@ -63,6 +63,7 @@
 #  warning "Therefore, some functions will not work."
 #  warning "Define ``LAZY_NO_WARN`` to hide this message"
 # endif
+# define LAZY_NO_WARN
 #endif
 
 /* "Predicates" <...> <impl> <pretty> */
@@ -433,7 +434,10 @@ typedef unsigned int bool;
  *
  * is how you'd calculate a factorial.
  */
-#define f(n)  (n is 1 ? n : n * f(n - 1))
+#define f(n)                   \
+        when n is 1            \
+        then n                 \
+        otherwise n * f(n - 1)
 
 /* This is only really put in here for the
  * possibility of infinity. I made a blog
