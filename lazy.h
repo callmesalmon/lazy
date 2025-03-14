@@ -53,17 +53,33 @@
 
 /* C++-checks <pre>,
  *
- * can be disabled by
- * defining "LAZY_NO_WARN"
+ * #1 can be enabled by defining
+ * "LAZY_CPP_ERROR" in your
+ * program.
+ *
+ * #2 can be disabled by
+ * defining "LAZY_CPP_NO_WARN"
  * in your program.
  */
-#ifndef LAZY_NO_WARN
+
+#ifdef LAZY_CPP_ERROR
 # ifdef __cplusplus
-#  warning "You are running lazy on C++."
-#  warning "Therefore, some functions will not work."
-#  warning "Define ``LAZY_NO_WARN`` to hide this message"
+#  error "LAZY ERROR"
+#  error "    As LAZY_CPP_ERROR has been defined, lazy.h"
+#  error "    has crashed the program you're running."
+#  error "    If you want to fix this, consider"
+#  error "    undefining LAZY_CPP_ERROR."
 # endif
-# define LAZY_NO_WARN
+#endif
+
+#ifndef LAZY_CPP_NO_WARN
+# ifdef __cplusplus
+#  warning "LAZY WARNING"
+#  warning "    You are running lazy on C++."
+#  warning "    Therefore, some functions will not work."
+#  warning "    Define ``LAZY_CPP_NO_WARN`` to hide this message"
+# endif
+# define LAZY_CPP_NO_WARN
 #endif
 
 /* "Predicates" <...> <impl> <pretty> */
