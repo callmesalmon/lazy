@@ -91,8 +91,8 @@ int main(flagargs) {
 ```
 
 ## Install
+Clone repo +:
 ```sh
-git clone https://github.com/ElisStaaf/lazy
 cd lazy
 sudo make
 echo "Enjoy!"
