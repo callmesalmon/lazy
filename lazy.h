@@ -387,7 +387,7 @@ typedef unsigned int bool;
  *
  * What this does is that it basically
  * calculates the length (L) of an array
- * (or under specific conditions)
+ * or (under specific conditions)
  * a string. It's a macro with argument
  * ... (annotated as "a") where
  *
@@ -477,7 +477,10 @@ double divide(double x, double y) {
  *
  * With x being anything, I
  * chose 10 but you don't need
- * to run x=10.
+ * to run x=10, you can run x=6
+ * or x=100*39 or any other
+ * POSITIVE number. Keyword:
+ * positive.
  */
 #define inf divide(10, 0)
 
@@ -487,7 +490,7 @@ double divide(double x, double y) {
  * Mimics the behaviour of the Ctrl key by using 0x1f as a memory
  * address to shift the last 3 bits to 0. I don't know how
  * it works either! Don't ask me! I am only a human
- * programmer made out of human flesh!
+ * programmer made out of human flesh! I promise!
  */
 #define ctrl(k) ((k) & 0x1f)
 
