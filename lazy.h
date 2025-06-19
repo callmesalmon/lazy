@@ -965,4 +965,25 @@ bool lazy_in(void *thing, size_t thing_size, size_t total_size, void *things) {
 #define array(type, name, ...) type name##[] = {__VA_ARGS__}
 #define list(type, name, ...)  type name##[] = {__VA_ARGS__}
 
+/* Bubble sorting mechanism <...>,
+ *
+ * Why? Everyone needs a bubble sorting mechanism
+ * in their life, and this library provides it.
+ */
+void swap(int* a, int* b) {
+    int tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
+
+void bubble_sort(int arr[], int dim) {
+
+    int i, j;
+    for (i = 0; i < dim - 1; i++)
+
+        for (j = 0; j < dim - i - 1; j++)
+            if (arr[j] > arr[j + 1])
+                swap(&arr[j], &arr[j + 1]);
+}
+
 #endif
